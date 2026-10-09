@@ -1,5 +1,8 @@
 name: Update skill from rustrician.io
 
+# Regenerated content reaches every agent that installs the skill, so it is never pushed directly:
+# changes arrive as a pull request on BRANCH for a maintainer to review.
+
 on:
   schedule:
     - cron: "17 6 * * *" # daily, 06:17 UTC
@@ -12,10 +15,16 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: update-skill
   cancel-in-progress: false
+
+env:
+  BRANCH: auto/update-skill
+  # GitHub disables schedules after 60 days without commits in a public repo; heartbeat before that.
+  HEARTBEAT_AFTER_DAYS: 50
 
 jobs:
   update:
@@ -48,15 +57,57 @@ jobs:
         if: steps.gen.outputs.changed == 'true'
         run: uvx --from skills-ref agentskills validate skills/rustrician
 
-      - name: Commit and push
+      - name: Open or update pull request
         if: steps.gen.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A skills sources.lock.json
           if git diff --cached --quiet; then
-            echo "Sources changed but the generated skill is identical; nothing to commit."
+            echo "Sources changed but the generated skill is identical; nothing to propose."
             exit 0
           fi
-          git commit -m "chore(skill): sync with rustrician.io ($(date -u +%F))"
-          git push
+          today=$(date -u +%F)
+          git commit -m "chore(skill): sync with rustrician.io ($today)"
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+          body=$(cat <<EOF
+          rustrician.io changed, and the generator rebuilt the skill. Type checks, tests and the Agent Skills validators passed.
+
+          **Review before merging.** This text is loaded into the context of every agent that installs the skill. Look for:
+          - instructions aimed at an AI agent rather than at Rust players
+          - unexpected links, commands or scripts
+          - large unexplained deletions
+
+          Changed sources and run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          Merging adds a commit to the default branch, which also resets GitHub's 60-day schedule timer.
+          EOF
+          )
+          if [ -n "$(gh pr list --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
+            gh pr edit "$BRANCH" --title "Sync skill with rustrician.io ($today)" --body "$body"
+          else
+            gh pr create --head "$BRANCH" --base "${{ github.event.repository.default_branch }}" \
+              --title "Sync skill with rustrician.io ($today)" --body "$body"
+          fi
+
+      - name: Heartbeat (keep the schedule enabled)
+        # Only a commit on the default branch resets the timer. Built from origin, never from the local
+        # checkout, so generated content cannot reach the default branch this way.
+        if: github.ref_name == github.event.repository.default_branch
+        run: |
+          base="origin/${{ github.ref_name }}"
+          last=$(git log -1 --format=%ct "$base")
+          days=$(( ($(date +%s) - last) / 86400 ))
+          echo "Last commit on $base was $days day(s) ago."
+          if [ "$days" -lt "$HEARTBEAT_AFTER_DAYS" ]; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q --detach "$base"
+          date -u +%FT%TZ > .github/heartbeat
+          git add .github/heartbeat
+          git commit -m "chore: heartbeat to keep the daily update schedule enabled"
+          git push origin "HEAD:refs/heads/${{ github.ref_name }}"

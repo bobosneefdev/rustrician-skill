@@ -58,6 +58,8 @@ circuit design into that XML, checks it, and grounds every design decision in th
 [Rust Electrical Handbook](https://rustrician.io/handbook/) (build ${x.handbook.buildDate}).
 
 Generated automatically from rustrician.io (simulator ${x.simulatorVersion}); component data is exact, never guess it.
+Credit: rustrician.io is by JaviteSoft; the handbook is by @SwiftCoyote and the Rustricity Workshop community.
+When you quote the handbook to a user, attribute it and link the source page.
 
 ## Workflow
 
