@@ -1,0 +1,81 @@
+# Utilities
+
+Utility components add functional and environmental features that improve base management and gameplay. They interact with the world to enable automation, control, storage, and other effects, emphasizing convenience and expanded interaction.
+
+## Camera ID List
+
+- **Cargo Ship**
+    - CARGODECK
+    - CARGOBRIDGE
+    - CARGOSTERN
+    - CARGOHOLD1
+    - CARGOHOLD2
+  - **Ferry Terminal**
+    - FERRYDOCK
+    - FERRYPARKING
+    - FERRYUTILITIES
+    - FERRYLOGISTICS
+  - **Abandoned Military Base:** Locate the Computer Station inside the Communication’s Tent. If there is a surface entrance to the train tunnels, sometimes the camera codes can also be found on its Computer Station. This is where players will find the final 4-digits for the cameras. These camera codes are randomly generated each wipe. With those 4-digits, players can now input the correct names into their Computer Station.
+    - COMPOUND
+    - OUTDOOR
+  - **Airfield camera codes:**
+    - AIRFIELDHELIPAD
+  - **Bandit Camp camera codes:**
+    - CASINO
+    - TOWNWEAPONS
+  - **Dome camera codes:**
+    - DOME1
+    - DOMETOP
+  - **Large Oil Rig camera codes:**
+    - OILRIG2HELI
+    - OILRIG2DOCK
+    - OILRIG2EXHAUST
+    - OILRIG2L1
+    - OILRIG2L2
+    - OILRIG2L3A
+    - OILRIG2L3B
+    - OILRIG2L4
+    - OILRIG2L5
+    - OILRIG2L6A
+    - OILRIG2L6B
+    - OILRIG2L6C
+    - OILRIG2L6D
+  - **Nuclear Missile Silo camera codes:**
+    - SILOEXIT1
+    - SILOEXIT2
+    - SILOMISSILE
+    - SILOSHIPPING
+    - SILOTOWER
+  - **Outpost / Compound camera codes:**
+    - COMPOUNDCHILL
+    - COMPOUNDMUSIC
+    - COMPOUNDCRUDE
+    - COMPOUNDSTREET
+  - **Small Oil Rig camera codes:**
+    - OILRIG1HELI
+    - OILRIG1DOCK
+    - OILRIG1EXHAUST
+    - OILRIG1L1
+    - OILRIG1L2
+    - OILRIG1L3
+    - OILRIG1L4
+  - **Underwater Labs:** Once inside an Underwater Lab, find the Underwater Lab's Security Room and access the Computer Station. This is where players will find the final 4-digits for the cameras. These camera codes are randomly generated each wipe. With those 4-digits, players can now input the correct names into their Computer Station.
+    - AUXPOWER
+    - BRIG
+    - CANTINA
+    - CAPTAINQUARTER
+    - CLASSIFIED
+    - CREWQUARTERS
+    - HALLWAY
+    - INFIRMARY
+    - LAB
+    - LOCKERROOM
+    - OPERATIONS
+    - SECURITYHALL
+    - TECHCABINET
+  - **Train Tunnel Surface Entrance: **Specifically, the version that looks like a circular concrete pad with a hatch, has a small utility tower and a mounted CCTV camera. Inside, there is a room next to the door that leads to the elevator shaft. These camera codes are randomly generated each wipe. With those 4-digits, players can now input the correct names into their Computer Station.
+    - OUTDOOR
+  - **RadTown camera codes:**
+    - RADTOWNHOUSE
+    - RADTOWNSBL
+    - RADTOWNAPARTMENTS

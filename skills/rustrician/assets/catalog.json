@@ -1,0 +1,6038 @@
+{
+ "source": "https://rustrician.io/",
+ "simulatorVersion": "1337.369",
+ "connections": [
+  [
+   "out",
+   "in"
+  ],
+  [
+   "fout",
+   "fin"
+  ],
+  [
+   "iout",
+   "iin"
+  ]
+ ],
+ "combinerSources": [
+  "solarpanel_large",
+  "generator_wind",
+  "generator_water",
+  "fuelgenerator_small",
+  "testgenerator_small",
+  "battery_large",
+  "battery_medium",
+  "battery_small",
+  "pressurepad",
+  "reactivetarget",
+  "watercatcher_large",
+  "watercatcher_small",
+  "waterbarrel",
+  "waterpump",
+  "waterpurifier",
+  "waterpurifier_simple",
+  "2mod_fueltank",
+  "combiner",
+  "splitter"
+ ],
+ "defaults": {
+  "colors": {
+   "wire": "#d3d3d3",
+   "hose": "#d3d3d3",
+   "pipe": "#d3d3d3"
+  },
+  "environment": {
+   "sun": "100",
+   "wind": "50",
+   "water": "50",
+   "speed": "10"
+  }
+ },
+ "sizes": {
+  "component": [
+   64,
+   64
+  ],
+  "text": [
+   128,
+   64
+  ],
+  "port": [
+   10,
+   10
+  ],
+  "groupPadding": 40
+ },
+ "limits": {
+  "maxTraceWires": 15,
+  "shortCircuitLoop": 8
+ },
+ "craftingNames": {
+  "hqm": "High Quality Metal",
+  "mf": "Metal Fragments",
+  "cloth": "Cloth",
+  "wood": "Wood",
+  "comp": "Targeting Computer",
+  "cam": "CCTV Camera",
+  "tech": "Tech Trash",
+  "gear": "Gears",
+  "spring": "Metal Spring",
+  "sm": "Sheet Metal",
+  "tarp": "Tarp",
+  "lgf": "Low Grade Fuel",
+  "pipe": "Metal Pipe",
+  "tank": "Empty Propane Tank",
+  "rfbroad": "RF Broadcaster",
+  "rfrecv": "RF Receiver"
+ },
+ "components": [
+  {
+   "cmpid": "solarpanel_large",
+   "name": "Solar Panel",
+   "item": "2090395347",
+   "category": "Power Sources",
+   "info": "A solar panel which converts sunlight into energy. The amount of energy generated is dependent on the sun's intensity and angle to the panel.",
+   "tips": [
+    "Root power producer with an output range of 0 - 20 power",
+    "Position panels facing east / west for optimal placement",
+    "Can be combined with the Root Combiner",
+    "Generates less power when damaged"
+   ],
+   "attrs": {
+    "cmpid": "solarpanel_large",
+    "isroot": "1",
+    "combinable": "1"
+   },
+   "ports": [
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1.1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Amount",
+     "type": "int",
+     "value": "20",
+     "tip": "Enter the amount of power to output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Range Min",
+     "type": "int",
+     "value": "0",
+     "tip": "Enter the minimum amount of power for range power output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Range Max",
+     "type": "int",
+     "value": "20",
+     "tip": "Enter the maximum amount of power for range power output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Enable Sun Simulation",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to link the output amount to the sun simulation amount."
+    }
+   ],
+   "craft": {
+    "hqm": 5,
+    "tech": 1
+   }
+  },
+  {
+   "cmpid": "generator_wind",
+   "name": "Wind Turbine",
+   "item": "-1819763926",
+   "category": "Power Sources",
+   "info": "Converts kinetic energy harvested from the wind into electricity. Amount generated will vary depending on wind speed. Higher altitudes will yield stronger winds.",
+   "tips": [
+    "Root power producer with an output range of 0 - 150 power",
+    "Position turbine at least 8 - 12 floors above ground for optimal placement",
+    "Can be combined with the Root Combiner"
+   ],
+   "attrs": {
+    "cmpid": "generator_wind",
+    "isroot": "1",
+    "combinable": "1"
+   },
+   "ports": [
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Amount",
+     "type": "int",
+     "value": "150",
+     "tip": "Enter the amount of power to output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Range Min",
+     "type": "int",
+     "value": "0",
+     "tip": "Enter the minimum amount of power for range power output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Range Max",
+     "type": "int",
+     "value": "150",
+     "tip": "Enter the maximum amount of power for range power output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Enable Wind Simulation",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to link the output amount to the wind simulation amount."
+    }
+   ],
+   "craft": {
+    "hqm": 10,
+    "gear": 3,
+    "sm": 3,
+    "wood": 500
+   }
+  },
+  {
+   "cmpid": "generator_water",
+   "name": "Water Wheel",
+   "item": "-379403794",
+   "category": "Power Sources",
+   "info": "Converts kinetic energy harvested from flowing water into electricity.",
+   "tips": [
+    "Root power producer with an output range of 0 - 60 power",
+    "Requires human interaction to generate over 30 power",
+    "Can be combined with the Root Combiner"
+   ],
+   "attrs": {
+    "cmpid": "generator_water",
+    "isroot": "1",
+    "combinable": "1"
+   },
+   "ports": [
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Amount",
+     "type": "int",
+     "value": "60",
+     "tip": "Enter the amount of power to output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Range Min",
+     "type": "int",
+     "value": "0",
+     "tip": "Enter the minimum amount of power for range power output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Range Max",
+     "type": "int",
+     "value": "60",
+     "tip": "Enter the maximum amount of power for range power output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Enable Water Simulation",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to link the output amount to the water simulation amount."
+    }
+   ],
+   "craft": {
+    "gear": 3,
+    "sm": 1,
+    "wood": 500
+   }
+  },
+  {
+   "cmpid": "fuelgenerator_small",
+   "alias": "gen_small",
+   "name": "Small Generator",
+   "item": "1849887541",
+   "category": "Power Sources",
+   "info": "A small electric generator powered by Low Grade Fuel that outputs 40 power.",
+   "tips": [
+    "Root power producer with an output of 40 power",
+    "Can be combined with the Root Combiner",
+    "Can be started and stopped with the power inputs",
+    "Run-time calculation with a maximum input of 500 fuel: (input / 4) * 60"
+   ],
+   "attrs": {
+    "cmpid": "fuelgenerator_small",
+    "alias": "gen_small",
+    "isroot": "1",
+    "combinable": "1",
+    "rate": 4,
+    "state": 1,
+    "display": 0,
+    "display_filter": "time",
+    "startval": 0,
+    "stopval": 0,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Force Start",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Force Stop",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Fuel Amount",
+     "type": "float",
+     "value": "500",
+     "tip": "Enter the amount of fuel to input."
+    },
+    {
+     "name": "Output Amount",
+     "type": "int",
+     "value": "40",
+     "tip": "Enter the amount of power to output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Run-time",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining run-time in seconds.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "hqm": 5,
+    "gear": 2
+   }
+  },
+  {
+   "cmpid": "testgenerator_small",
+   "alias": "generator_small",
+   "name": "Test Generator",
+   "item": "-295829489",
+   "category": "Power Sources",
+   "info": "An alternative source of power to the Wind Turbine and Solar Panels. This item must be spawned in.",
+   "tips": [
+    "Root power producer with an output of 100 power or 300 power combined",
+    "Can be combined with the Root Combiner",
+    "Can only be spawned in",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "testgenerator_small",
+    "alias": "generator_small",
+    "isroot": "1",
+    "combinable": "1",
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power Output 1",
+     "type": "out",
+     "consumable": true,
+     "x": 1.1,
+     "y": 0.4
+    },
+    {
+     "label": "Power Output 2",
+     "type": "out",
+     "consumable": true,
+     "x": 1.1,
+     "y": 0.1
+    },
+    {
+     "label": "Power Output 3",
+     "type": "out",
+     "consumable": true,
+     "x": 1.1,
+     "y": 0.7
+    }
+   ],
+   "props": [
+    {
+     "name": "Amount",
+     "type": "int",
+     "value": "100",
+     "tip": "Enter the amount of power to output.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {}
+  },
+  {
+   "cmpid": "battery_large",
+   "name": "Large Rechargeable Battery",
+   "item": "553270375",
+   "category": "Batteries",
+   "info": "A Large Rechargeable Battery. Must have a minimum of 5 seconds to discharge. Can be wired in series. Charging rate is dependent on power in, with a maximum of 80% efficiency.",
+   "tips": [
+    "Provides root power with an output of 100 power",
+    "Has a maximum storage capacity of 27,000 rWm",
+    "Can be combined with the Root Combiner",
+    "Maximum charge input is 400 (4x output rate)",
+    "Charges with 80% efficiency (20% loss of input amount)",
+    "Can only be blocked (prevent discharge) using a Blocker, Switch, or RF Receiver"
+   ],
+   "attrs": {
+    "cmpid": "battery_large",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 100,
+    "charge_max": 24000,
+    "charge_min": 0,
+    "input_multiplier": 4,
+    "efficiency": 80,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "usage": 100,
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Fully Charged",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "200",
+     "tip": "Enter the capacity in rWm (rust Watt minutes).",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Charge Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining charge while discharging.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while discharging.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "hqm": 10,
+    "tech": 2
+   }
+  },
+  {
+   "cmpid": "battery_medium",
+   "name": "Medium Rechargeable Battery",
+   "item": "2023888403",
+   "category": "Batteries",
+   "info": "A Medium Rechargeable Battery. Must have a minimum of 5 seconds to discharge. Can be wired in series. Charging rate is dependent on power in, with a maximum of 80% efficiency.",
+   "tips": [
+    "Provides root power with an output of 50 power",
+    "Has a maximum storage capacity of 9,000 rWm",
+    "Can be combined with the Root Combiner",
+    "Maximum charge input is 200 (4x output rate)",
+    "Charges with 80% efficiency (20% loss of input amount)",
+    "Can only be blocked (prevent discharge) using a Blocker, Switch, or RF Receiver"
+   ],
+   "attrs": {
+    "cmpid": "battery_medium",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 50,
+    "charge_max": 9000,
+    "charge_min": 0,
+    "input_multiplier": 4,
+    "efficiency": 80,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "usage": 50,
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Fully Charged",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "100",
+     "tip": "Enter the capacity in rWm (rust Watt minutes).",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Charge Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining charge while discharging.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while discharging.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "hqm": 5,
+    "tech": 1
+   }
+  },
+  {
+   "cmpid": "battery_small",
+   "name": "Small Rechargeable Battery",
+   "item": "-692338819",
+   "category": "Batteries",
+   "info": "A Small Rechargeable Battery. Must have a minimum of 5 seconds to discharge. Can be wired in series. Charging rate is dependent on power in, with a maximum of 80% efficiency.",
+   "tips": [
+    "Provides root power with an output of 15 power",
+    "Has a maximum storage capacity of 400 rWm",
+    "Can be combined with the Root Combiner",
+    "Maximum charge input is 60 (4x output rate)",
+    "Charges with 80% efficiency (20% loss of input amount)",
+    "Can only be blocked (prevent discharge) using a Blocker, Switch, or RF Receiver"
+   ],
+   "attrs": {
+    "cmpid": "battery_small",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 15,
+    "charge_max": 400,
+    "charge_min": 0,
+    "input_multiplier": 4,
+    "efficiency": 80,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "usage": 15,
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Fully Charged",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "37",
+     "tip": "Enter the capacity in rWm (rust Watt minutes).",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Charge Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining charge while discharging.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while discharging.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "hqm": 5
+   }
+  },
+  {
+   "cmpid": "combiner",
+   "name": "Root Combiner",
+   "item": "-458565393",
+   "category": "Distribution",
+   "info": "This object combines two root electrical sources into a single signal. Helpful for stringing together low energy batteries or solar panels to produce higher power output. Can be wired in series, can not be used with any non energy producing electrical components.",
+   "tips": [
+    "Can be combined with other Root Combiners",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator",
+    "A limit of 15 chained Root Combiners is allowed before reaching Max Depth"
+   ],
+   "attrs": {
+    "cmpid": "combiner",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In 1",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Power In 2",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "branch",
+   "name": "Electrical Branch",
+   "item": "-1448252298",
+   "category": "Distribution",
+   "info": "This object allows you to branch power off from a main line by a set amount.",
+   "tips": [
+    "Adjustable branch (or split) amount with a minimum of 1",
+    "The Branch port is prioritized first when outputting power but is not powered first",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "branch",
+    "consumption": "0",
+    "display": 0,
+    "passthrough": "0",
+    "branch_min": "1",
+    "usage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1.05
+    },
+    {
+     "label": "Branch Out",
+     "type": "out",
+     "consumable": true,
+     "delayed": true,
+     "x": 0.2,
+     "y": -0.2
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.6,
+     "y": -0.2
+    }
+   ],
+   "props": [
+    {
+     "name": "Branch",
+     "type": "int",
+     "value": "2",
+     "minval": "1",
+     "tip": "Enter the branch amount."
+    },
+    {
+     "name": "Show Branch Amount",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the branch amount.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "blocker",
+   "name": "Blocker",
+   "item": "-690968985",
+   "category": "Logic",
+   "info": "This object prevents passthrough while power is received through its second input.",
+   "tips": [
+    "Can be used to block the output (prevent discharge) of a battery and allow it to charge",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "blocker",
+    "consumption": "0",
+    "state": 1,
+    "passthrough": "0",
+    "blockable": "1",
+    "usage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1.05
+    },
+    {
+     "label": "Block Passthrough",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "memorycell",
+   "name": "Memory Cell",
+   "item": "-746647361",
+   "category": "Logic",
+   "info": "A 1 bit storage component. SET input will set the value to 1 CLEAR input sets the value to 0. Output will provide connected power if value is 1, Inverted output will provide connected power if value is 0. This is also known as a D-Type Flip Flop.",
+   "tips": [
+    "The only component that allows switched (redirected) output of power",
+    "When Reset is powered, the Set port will toggle Output if powered and Inverted Output if not",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "memorycell",
+    "consumption": "0",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 0,
+    "consumed": [],
+    "intoggle": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1.05
+    },
+    {
+     "label": "Set",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.1
+    },
+    {
+     "label": "Reset",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Toggle",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.7
+    },
+    {
+     "label": "Power Out Inverted",
+     "type": "out",
+     "consumable": true,
+     "x": 0.2,
+     "y": -0.2
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.6,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "splitter",
+   "name": "Splitter",
+   "item": "-563624462",
+   "category": "Distribution",
+   "info": "Splits an electrical signal into 3 multiple signals. the amount passed through is equal to the input amount divided by the number of used output slots.",
+   "tips": [
+    "Evenly splits the input power to all connected outputs",
+    "Extra power after the split is spread evenly across all connected outputs (left to right)",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "splitter",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Power Out 1",
+     "type": "out",
+     "consumable": true,
+     "direct": true,
+     "x": 0.1,
+     "y": 1
+    },
+    {
+     "label": "Power Out 2",
+     "type": "out",
+     "consumable": true,
+     "direct": true,
+     "x": 0.45,
+     "y": 1
+    },
+    {
+     "label": "Power Out 3",
+     "type": "out",
+     "consumable": true,
+     "direct": true,
+     "x": 0.8,
+     "y": 1
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "timer",
+   "name": "Timer",
+   "item": "665332906",
+   "category": "Logic",
+   "info": "A Timer switch, will pass power through for duration.",
+   "tips": [
+    "Defaults to 30 seconds and has a minimum of 0.25 seconds",
+    "Can be used as a push switch which auto-resets (with a 1-second timer)"
+   ],
+   "attrs": {
+    "cmpid": "timer",
+    "consumption": "0",
+    "state": 0,
+    "display": 0,
+    "display_filter": "time",
+    "passthrough": "0",
+    "usage": 0,
+    "value": 0,
+    "ivalue": 0,
+    "ovalue": 0,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    },
+    {
+     "label": "Toggle On",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [
+    {
+     "name": "Duration",
+     "type": "int",
+     "value": "10",
+     "tip": "Enter the duration amount in seconds."
+    },
+    {
+     "name": "Show Countdown",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the time remaining in seconds.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "switch_rand",
+   "name": "RAND Switch",
+   "item": "492357192",
+   "category": "Logic",
+   "info": "This switch will allow passthrough based on a random number. Each time the 'Set' input receives power it will roll true or false to allow passthrough.",
+   "tips": [
+    "When Set is powered, the component has a 50% chance to output power",
+    "Useful for circuits requiring randomization",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "switch_rand",
+    "consumption": "0",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 0,
+    "consumed": [],
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    },
+    {
+     "label": "Set",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.25
+    },
+    {
+     "label": "Reset",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.65
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "switch",
+   "name": "Switch",
+   "item": "1951603367",
+   "category": "Switches",
+   "info": "A simple electric switch.",
+   "tips": [
+    "A simple toggle switch; use the Timer for a push-button style switch",
+    "Can be used to block the output of a battery"
+   ],
+   "attrs": {
+    "cmpid": "switch",
+    "consumption": "0",
+    "state": 0,
+    "onval": 0,
+    "offval": 0,
+    "passthrough": "0",
+    "blockable": "1",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    },
+    {
+     "label": "Switch On",
+     "type": "in",
+     "consumable": true,
+     "warning": false,
+     "x": 1,
+     "y": 0.25
+    },
+    {
+     "label": "Switch Off",
+     "type": "in",
+     "warning": false,
+     "consumable": true,
+     "x": 1,
+     "y": 0.65
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Dummy",
+     "type": "odummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "switch_or",
+   "name": "OR Switch",
+   "item": "-1286302544",
+   "category": "Logic",
+   "info": "A logic gate that allows electrical passthrough if EITHER input receives power, passthrough amount is the greater of either power source.",
+   "tips": [
+    "A component that accepts one or two powered inputs and outputs the greater power",
+    "A minimum requirement of 9 components is required to loop-back power"
+   ],
+   "attrs": {
+    "cmpid": "switch_or",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In 1",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Power In 2",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "reconsumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "switch_and",
+   "name": "AND Switch",
+   "item": "1171735914",
+   "category": "Logic",
+   "info": "A logic gate that allows electrical passthrough if BOTH inputs receives power, passthrough amount is the greater of either power source.",
+   "tips": [
+    "A component that requires two powered inputs and outputs the greater power"
+   ],
+   "attrs": {
+    "cmpid": "switch_and",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In 1",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Power In 2",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "reconsumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "switch_xor",
+   "name": "XOR Switch",
+   "item": "1293102274",
+   "category": "Logic",
+   "info": "An exclusive-or logic gate that allows electrical passthrough if ONLY ONE input receives power, passthrough amount is whichever single input is active. if BOTH inputs receive power, passthrough will be zero.",
+   "tips": [
+    "A component that accepts one or two powered inputs and will not output power while both inputs are powered",
+    "A minimum requirement of 9 components is required to loop-back power"
+   ],
+   "attrs": {
+    "cmpid": "switch_xor",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In 1",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Power In 2",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "reconsumable": false,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "counter",
+   "name": "Counter",
+   "item": "-216999575",
+   "category": "Logic",
+   "info": "A basic cathode ray tube screen combined with an incremental counter. Can display power received, or can count upwards and allow passthrough when a target is reached.",
+   "tips": [
+    "Has a minimum value of 0 and a maximum value of 999",
+    "Can also be used to display the passthrough amount"
+   ],
+   "attrs": {
+    "cmpid": "counter",
+    "consumption": "0",
+    "value": 0,
+    "ivalue": 0,
+    "dvalue": 0,
+    "cvalue": 0,
+    "value_max": 999,
+    "value_min": 0,
+    "display": 0,
+    "display_filter": "zero",
+    "passthrough": "0",
+    "usage": 0,
+    "consumed": []
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    },
+    {
+     "label": "Increment Counter",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.1
+    },
+    {
+     "label": "Decrement Counter",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Clear Counter",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.7
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [
+    {
+     "name": "Target",
+     "type": "int",
+     "value": "10",
+     "tip": "Enter the target value amount."
+    },
+    {
+     "name": "Reset",
+     "type": "int",
+     "value": "0",
+     "tip": "Enter the reset value amount."
+    },
+    {
+     "name": "Value",
+     "type": "int",
+     "value": "0",
+     "maxlen": "3",
+     "sync_attr": "value",
+     "tip": "Enter the value amount.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Passthrough",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the passthrough amount."
+    }
+   ],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "doorcontroller",
+   "name": "Door Controller",
+   "item": "-502177121",
+   "category": "Utilities",
+   "info": "A Door Controller. Will manipulate the state of the closest door when it receives power.",
+   "tips": [
+    "Use the passthrough power to detect when the door has been destroyed"
+   ],
+   "attrs": {
+    "cmpid": "doorcontroller",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "state": 1,
+    "display": "",
+    "display_filter": "string"
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    },
+    {
+     "label": "Open",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.25
+    },
+    {
+     "label": "Close",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.65
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "hbhfsensor",
+   "name": "HBHF Sensor",
+   "item": "-1507239837",
+   "category": "Sensors",
+   "info": "A Heartbeat, Breathing, Humidity and Footstep sensor. Passthrough is equal to the number of humans detected in a 10 m radius with line of sight.",
+   "tips": [
+    "Requires at least 2 power to output 1 power while detecting a player (scales with power input / players detected)",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "hbhfsensor",
+    "consumption": "1",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Detected",
+     "type": "int",
+     "value": "1",
+     "tip": "Enter the detected amount.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "seismicsensor",
+   "name": "Seismic Sensor",
+   "item": "-948291630",
+   "category": "Sensors",
+   "info": "A small device that detects vibrations within a set range. Will let power pass through depending on the explosive type detected, ideal to know when your time has come.",
+   "tips": [
+    "Only requires 1 power to output 1 - 3 power after detecting an explosion"
+   ],
+   "attrs": {
+    "cmpid": "seismicsensor",
+    "consumption": "1",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 1,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [
+    {
+     "name": "Detected",
+     "type": "int",
+     "value": "1",
+     "tip": "Enter the detected amount.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "hqm": 3,
+    "tech": 1
+   }
+  },
+  {
+   "cmpid": "laserdetector",
+   "name": "Laser Detector",
+   "item": "-798293154",
+   "category": "Sensors",
+   "info": "A gate which allows power to flow while a player is in the beam.",
+   "tips": [
+    "The laser can be hidden with certain items such as the Refrigerator",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "laserdetector",
+    "consumption": "1",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "pressurepad",
+   "name": "Pressure Pad",
+   "item": "-2049214035",
+   "category": "Sensors",
+   "info": "A gate which allows power to flow while a player is standing on it.",
+   "tips": [
+    "The pad can be hidden with certain items such as the Rug",
+    "The pad can output a pulse of 1 power while not powered",
+    "Can be combined with the Root Combiner (when pulsing)",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "pressurepad",
+    "isroot": "1",
+    "combinable": "1",
+    "consumption": "0",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 0,
+    "pulse": "0",
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150,
+    "gear": 1,
+    "spring": 1
+   }
+  },
+  {
+   "cmpid": "rf_broadcaster",
+   "name": "RF Broadcaster",
+   "item": "-1044468317",
+   "category": "Radio Frequency (RF)",
+   "info": "An RF Broadcaster.",
+   "tips": [
+    "The RF signal broadcasted is map-wide (global)"
+   ],
+   "attrs": {
+    "cmpid": "rf_broadcaster",
+    "consumption": "1",
+    "display": 0,
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Frequency",
+     "type": "int",
+     "value": "55",
+     "maxlen": "6",
+     "minval": "1",
+     "tip": "Enter the RF frequency."
+    },
+    {
+     "name": "Show Frequency",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the frequency.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 150
+   }
+  },
+  {
+   "cmpid": "rf_receiver",
+   "name": "RF Receiver",
+   "item": "888415708",
+   "category": "Radio Frequency (RF)",
+   "info": "An RF Receiver.",
+   "tips": [
+    "The RF signal received is map-wide (global)",
+    "Can be used to block the output of a battery",
+    "Small Oil Rig Frequency: 4765",
+    "Large Oil Rig Frequency: 4768",
+    "Excavator Frequency: 4777"
+   ],
+   "attrs": {
+    "cmpid": "rf_receiver",
+    "consumption": "1",
+    "display": 0,
+    "state": 0,
+    "active": "0",
+    "blockable": "1",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Frequency",
+     "type": "int",
+     "value": "55",
+     "maxlen": "6",
+     "minval": "1",
+     "tip": "Enter the RF frequency."
+    },
+    {
+     "name": "Show Frequency",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the frequency.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 150
+   }
+  },
+  {
+   "cmpid": "rf_transmitter",
+   "name": "RF Transmitter",
+   "item": "596469572",
+   "category": "Radio Frequency (RF)",
+   "info": "A hand held RF signal broadcaster.",
+   "tips": [
+    "The RF signal transmitted is map-wide (global)"
+   ],
+   "attrs": {
+    "cmpid": "rf_transmitter",
+    "display": 0,
+    "state": 0,
+    "active": "0",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Dummy",
+     "type": "dummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [
+    {
+     "name": "Frequency",
+     "type": "int",
+     "value": "55",
+     "maxlen": "6",
+     "minval": "1",
+     "tip": "Enter the RF frequency."
+    },
+    {
+     "name": "Show Frequency",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the frequency.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "rf_pager",
+   "name": "RF Pager",
+   "item": "-566907190",
+   "category": "Radio Frequency (RF)",
+   "info": "An RF Pager.",
+   "tips": [
+    "The RF signal received is map-wide (global)",
+    "Small Oil Rig Frequency: 4765",
+    "Large Oil Rig Frequency: 4768",
+    "Excavator Frequency: 4777"
+   ],
+   "attrs": {
+    "cmpid": "rf_pager",
+    "display": 0,
+    "active": "0"
+   },
+   "ports": [
+    {
+     "label": "Dummy",
+     "type": "dummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [
+    {
+     "name": "Frequency",
+     "type": "int",
+     "value": "55",
+     "maxlen": "6",
+     "minval": "1",
+     "tip": "Enter the RF frequency."
+    },
+    {
+     "name": "Show Frequency",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the frequency.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "audioalarm",
+   "name": "Audio Alarm",
+   "item": "2100007442",
+   "category": "Utilities",
+   "info": "A speaker which will emit a loud warning alarm when powered.",
+   "tips": [
+    "Useful for audible alerts and can be heard several building blocks away",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "audioalarm",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "flasherlight",
+   "name": "Flasher Light",
+   "item": "-939424778",
+   "category": "Lights",
+   "info": "A flashing blue light.",
+   "tips": [
+    "Has a passthrough power output",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "flasherlight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 120
+   }
+  },
+  {
+   "cmpid": "sirenlight",
+   "name": "Siren Light",
+   "item": "762289806",
+   "category": "Lights",
+   "info": "A spinning siren light.",
+   "tips": [
+    "Has a passthrough power output",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "sirenlight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 120
+   }
+  },
+  {
+   "cmpid": "ceilinglight",
+   "name": "Ceiling Light",
+   "item": "1142993169",
+   "category": "Lights",
+   "info": "A ceiling light.",
+   "tips": [
+    "Has a passthrough power output"
+   ],
+   "attrs": {
+    "cmpid": "ceilinglight",
+    "consumption": "2",
+    "active": "0",
+    "usage": 2
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "simplelight",
+   "name": "Simple Light",
+   "item": "-282113991",
+   "category": "Lights",
+   "info": "A simple debugging light.",
+   "tips": [
+    "Has a passthrough power output",
+    "Can only be spawned in",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "simplelight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {}
+  },
+  {
+   "cmpid": "samsite",
+   "name": "SAM Site",
+   "item": "-1009359066",
+   "category": "Defense",
+   "info": "A surface to air rocket site.",
+   "tips": [
+    "Do not place near a Wind Turbine to avoid destruction",
+    "Requires 25 power to operate and 26 power for aux ports to output",
+    "Has 3 auxillary outputs: Has Target, Low Ammo, and No Ammo (each output 1 power)"
+   ],
+   "attrs": {
+    "cmpid": "samsite",
+    "consumption": "25",
+    "active": "0",
+    "state": 0,
+    "usage": 25,
+    "mode": "ALL",
+    "display": "",
+    "display_filter": "string",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Invert Mode",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Has Target",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.1
+    },
+    {
+     "label": "Low Ammo",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "No Ammo",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.7
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    }
+   ],
+   "props": [
+    {
+     "name": "Defender Mode",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to set Defender Mode as the default."
+    },
+    {
+     "name": "Has Target",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to Has Target.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Low Ammo",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to Low Ammo.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "No Ammo",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to No Ammo.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {}
+  },
+  {
+   "cmpid": "autoturret",
+   "name": "Auto Turret",
+   "item": "-2139580305",
+   "category": "Defense",
+   "info": "The Auto Turret is a fully automatic entry denial device that is used for defense.",
+   "tips": [
+    "Requires 10 power to operate and 11 power for aux ports to output",
+    "Has 3 outputs: Has Target, Low Ammo, and No Ammo (each output 1 power)"
+   ],
+   "attrs": {
+    "cmpid": "autoturret",
+    "consumption": "10",
+    "active": "0",
+    "state": 0,
+    "usage": 10,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Has Target",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.1
+    },
+    {
+     "label": "Low Ammo",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "No Ammo",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.7
+    }
+   ],
+   "props": [
+    {
+     "name": "Has Target",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to Has Target.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Low Ammo",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to Low Ammo.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "No Ammo",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to No Ammo.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "hqm": 10,
+    "comp": 1,
+    "cam": 1
+   }
+  },
+  {
+   "cmpid": "teslacoil",
+   "name": "Tesla Coil",
+   "item": "1371909803",
+   "category": "Defense",
+   "info": "A Tesla Coil. Shocks nearby players using supplied input power with a damage cap of 25 hp/sec.",
+   "tips": [
+    "Automatically heals itself when under building privilege",
+    "Requires 1 power to operate",
+    "Full health is 250 and decays 2 health per sec of operation until broken",
+    "Damage dealt scales with input power supplied (input power * 1 = damage dealt per sec)",
+    "Damage cap is set at 25 hp/sec",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "teslacoil",
+    "consumption": "1",
+    "rate": 2,
+    "damage": 1,
+    "damage_cap": 25,
+    "display": 0,
+    "display_filter": "time",
+    "active": "0",
+    "decayed": "0",
+    "usage": 35,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Health Amount",
+     "type": "float",
+     "value": "250",
+     "tip": "Enter the amount of component health."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining time until decay in seconds.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "hqm": 3,
+    "tech": 1
+   }
+  },
+  {
+   "cmpid": "xmas_lightstring",
+   "name": "Deluxe Christmas Lights",
+   "item": "-151387974",
+   "category": "Lights",
+   "info": "Colored, Animated, Powered Lights. Requires 5 electricity.",
+   "tips": [
+    "Must be purchased from the Steam Market to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "xmas_lightstring",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "igniter",
+   "name": "Igniter",
+   "item": "-44876289",
+   "category": "Utilities",
+   "info": "Ignites nearby objects such as furnaces and campfires when power is received.",
+   "tips": [
+    "Automatically heals itself when under building privilege",
+    "Ignites almost a 1-block radius",
+    "Full health is 250 and decays 1/4 health per sec of operation until broken",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "igniter",
+    "consumption": "2",
+    "rate": 4,
+    "display": 0,
+    "display_filter": "time",
+    "active": "0",
+    "decayed": "0",
+    "usage": 2,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Health Amount",
+     "type": "float",
+     "value": "250",
+     "tip": "Enter the amount of component health."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining time until decay in seconds.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "cctv_camera",
+   "name": "CCTV Camera",
+   "item": "634478325",
+   "category": "Utilities",
+   "info": "A CCTV Camera system can be used for realtime surveillance and security around your base when powered and paired with the Computer Station.",
+   "tips": [
+    "Building privilege is required to set the ID of the camera",
+    "<a href=\"https://www.reddit.com/r/rustrician/comments/fe032p/cctv_fixed_locations_and_identifiers/\" target=\"_blank\">Camera ID Reference</a>"
+   ],
+   "attrs": {
+    "cmpid": "cctv_camera",
+    "consumption": "3",
+    "active": "0",
+    "usage": 3
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    }
+   ],
+   "props": [],
+   "craft": {}
+  },
+  {
+   "cmpid": "ptz_cctv_camera",
+   "name": "PTZ CCTV Camera",
+   "item": "140006625",
+   "category": "Utilities",
+   "info": "A CCTV Camera system can be used for realtime surveillance and security when paired with the Computer Station. This camera has pan, tilt, and zoom capability.",
+   "tips": [
+    "Building privilege is required to set the ID of the camera"
+   ],
+   "attrs": {
+    "cmpid": "ptz_cctv_camera",
+    "consumption": "3",
+    "active": "0",
+    "usage": 3
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 150,
+    "cam": 1
+   }
+  },
+  {
+   "cmpid": "electricheater",
+   "name": "Electric Heater",
+   "item": "-784870360",
+   "category": "Utilities",
+   "info": "Provides warmth in a radius when on.",
+   "tips": [
+    "The warmth radius is 4 meters, or a little more than 2 square foundations",
+    "Has a passthrough power output"
+   ],
+   "attrs": {
+    "cmpid": "electricheater",
+    "consumption": "3",
+    "active": "0",
+    "usage": 3
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 200
+   }
+  },
+  {
+   "cmpid": "button",
+   "name": "Button",
+   "item": "-1778897469",
+   "category": "Switches",
+   "info": "A simple electric button.",
+   "tips": [
+    "The button will passthrough power for 1 second when activated with input power connected",
+    "The button can output a pulse of 2 power for 0.25 seconds with no input power connected",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "button",
+    "isroot": "1",
+    "combinable": "0",
+    "consumption": "0",
+    "state": 0,
+    "display": 0,
+    "display_filter": "time",
+    "passthrough": "0",
+    "usage": 0,
+    "pulse": "0",
+    "value": 0,
+    "maxval": 1,
+    "rotatable": 1,
+    "rotation": 0,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Show Countdown",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the time remaining in seconds.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "smart_alarm",
+   "name": "Smart Alarm",
+   "item": "-695978112",
+   "category": "Smart",
+   "info": "Sends a notifications to your phone when powered on.",
+   "tips": [
+    "Can be paired with the <a href=\"https://rust.facepunch.com/companion\" target=\"_blank\">Rust+ companion app</a> for mobile alerts",
+    "Can be paired with the <a href=\"https://bot.rustplus.io/\" target=\"_blank\">RustPlusBot</a> for team chat alerts",
+    "Has a passthrough power output"
+   ],
+   "attrs": {
+    "cmpid": "smart_alarm",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 3,
+    "tech": 1
+   }
+  },
+  {
+   "cmpid": "smart_switch",
+   "name": "Smart Switch",
+   "item": "988652725",
+   "category": "Smart",
+   "info": "A smart electric switch.",
+   "tips": [
+    "Can be paired with the <a href=\"https://rust.facepunch.com/companion\" target=\"_blank\">Rust+ companion app</a> for mobile control",
+    "Can be paired with the <a href=\"https://bot.rustplus.io/\" target=\"_blank\">RustPlusBot</a> for team chat control",
+    "Can be used to block the output of a battery"
+   ],
+   "attrs": {
+    "cmpid": "smart_switch",
+    "consumption": "0",
+    "state": 0,
+    "onval": 0,
+    "offval": 0,
+    "passthrough": "0",
+    "blockable": "1",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    },
+    {
+     "label": "Switch On",
+     "type": "in",
+     "consumable": true,
+     "warning": false,
+     "x": 1,
+     "y": 0.25
+    },
+    {
+     "label": "Switch Off",
+     "type": "in",
+     "warning": false,
+     "consumable": true,
+     "x": 1,
+     "y": 0.65
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Dummy",
+     "type": "odummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 3,
+    "tech": 1
+   }
+  },
+  {
+   "cmpid": "modularcarlift",
+   "name": "Modular Car Lift",
+   "item": "1696050067",
+   "category": "Utilities",
+   "info": "This allows you to modify modular vehicles.",
+   "tips": [
+    "Requires 5 power to operate"
+   ],
+   "attrs": {
+    "cmpid": "modularcarlift",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 200,
+    "hqm": 5,
+    "gear": 1
+   }
+  },
+  {
+   "cmpid": "searchlight",
+   "name": "Search Light",
+   "item": "2087678962",
+   "category": "Lights",
+   "info": "A Large, wide beam, aimable light source.",
+   "tips": [
+    "Requires 10 power to operate"
+   ],
+   "attrs": {
+    "cmpid": "searchlight",
+    "consumption": "10",
+    "active": "0",
+    "usage": 10
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 200,
+    "wood": 500
+   }
+  },
+  {
+   "cmpid": "reactivetarget",
+   "name": "Reactive Target",
+   "item": "-1736356576",
+   "category": "Switches",
+   "info": "A reactive target that knocks down when hit, can be reset.",
+   "tips": [
+    "Does not require input power to raise or lower the target",
+    "The target can output a pulse of 1 power while not powered",
+    "Can be combined with the Root Combiner (when pulsing)"
+   ],
+   "attrs": {
+    "cmpid": "reactivetarget",
+    "isroot": "1",
+    "combinable": "1",
+    "consumption": "1",
+    "active": "0",
+    "state": 0,
+    "usage": 2,
+    "pulse": "0",
+    "lowerval": 0,
+    "resetval": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Lower",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Reset",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 150,
+    "wood": 100,
+    "gear": 1
+   }
+  },
+  {
+   "cmpid": "storage_monitor",
+   "name": "Storage Monitor",
+   "item": "1149964039",
+   "category": "Smart",
+   "info": "The Storage Monitor attaches to the Tool Cupboard and Large Storage Box to monitor the container contents. Output sends a pulse when the container is updated.",
+   "tips": [
+    "Can be paired with the <a href=\"https://rust.facepunch.com/companion\" target=\"_blank\">Rust+ companion app</a> for mobile alerts",
+    "Can be paired with the <a href=\"https://bot.rustplus.io/\" target=\"_blank\">RustPlusBot</a> for team chat alerts",
+    "When input power is 2 or more, it will output 1 power when the storage container contents are changed"
+   ],
+   "attrs": {
+    "cmpid": "storage_monitor",
+    "consumption": "1",
+    "state": 0,
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 3,
+    "tech": 1
+   }
+  },
+  {
+   "cmpid": "computerstation",
+   "name": "Computer Station",
+   "item": "-1588628467",
+   "category": "Utilities",
+   "info": "A Computer station for remote control access",
+   "tips": [
+    "Requires 5 power to operate and only incurs active usage while in-use"
+   ],
+   "attrs": {
+    "cmpid": "computerstation",
+    "consumption": "5",
+    "state": 0,
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 5,
+    "comp": 1,
+    "rfbroad": 1,
+    "rfrecv": 1
+   }
+  },
+  {
+   "cmpid": "elevator",
+   "name": "Elevator",
+   "item": "1177596584",
+   "category": "Utilities",
+   "info": "A powered elevator. Place another elevator above or below this to connect it. Requires power.",
+   "tips": [
+    "There are two Call Elevator ports per floor"
+   ],
+   "attrs": {
+    "cmpid": "elevator",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.25
+    },
+    {
+     "label": "Call Elevator",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.65
+    },
+    {
+     "label": "Call Elevator Alt",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.65
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 200,
+    "hqm": 3,
+    "gear": 1
+   }
+  },
+  {
+   "cmpid": "telephone",
+   "name": "Telephone",
+   "item": "1234878710",
+   "category": "Utilities",
+   "info": "Use the telephone to call other telephones on the island!",
+   "tips": [
+    "Requires at least 1 power to operate and 2 or more for passthrough"
+   ],
+   "attrs": {
+    "cmpid": "telephone",
+    "consumption": "1",
+    "state": 0,
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Call Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100,
+    "tech": 1,
+    "wood": 50
+   }
+  },
+  {
+   "cmpid": "digitalclock",
+   "name": "Digital Clock",
+   "item": "1619039771",
+   "category": "Utilities",
+   "info": "A digital clock that displays the server time and lets you set alarms to pass power through when ringing. Ideal for synchronizing traps or timed events.",
+   "tips": [
+    "Requires at least 1 power to operate and 2 or more for passthrough"
+   ],
+   "attrs": {
+    "cmpid": "digitalclock",
+    "consumption": "1",
+    "state": 0,
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.7
+    },
+    {
+     "label": "Power Out",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.25
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "fridge",
+   "name": "Fridge",
+   "item": "1413014235",
+   "category": "Utilities",
+   "info": "A fridge you can store food into!",
+   "tips": [
+    "The Fridge requires 5 power to prevent food spoilage"
+   ],
+   "attrs": {
+    "cmpid": "fridge",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "mini_fridge",
+   "name": "Mini Fridge",
+   "item": "1174484438",
+   "category": "Utilities",
+   "info": "Ideal for preserving food and keeping items cool.",
+   "tips": [
+    "The Mini Fridge requires 2 power to prevent food spoilage"
+   ],
+   "attrs": {
+    "cmpid": "mini_fridge",
+    "consumption": "2",
+    "active": "0",
+    "usage": 2
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "vending.machine",
+   "name": "Vending Machine",
+   "item": "198438816",
+   "category": "Utilities",
+   "info": "Trade your goods with other players safely by creating sell and buy orders. If a raider gains access to the rear panel, they will have free reign over all of your goodies. Keep it safe.",
+   "tips": [
+    "The Vending Machine requires 5 power to prevent food spoilage"
+   ],
+   "attrs": {
+    "cmpid": "vending.machine",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "commandblock",
+   "name": "Command Block",
+   "item": "-1247485104",
+   "category": "Utilities",
+   "info": "A block that runs commands.",
+   "tips": [
+    "Can only be spawned in by an admin"
+   ],
+   "attrs": {
+    "cmpid": "commandblock",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": -0.2
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.6,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {}
+  },
+  {
+   "cmpid": "neonsign_small",
+   "name": "Small Neon Sign",
+   "item": "1305578813",
+   "category": "Lights",
+   "info": "A small neon sign!",
+   "tips": [
+    "Requires 2 power to operate the sign"
+   ],
+   "attrs": {
+    "cmpid": "neonsign_small",
+    "consumption": "2",
+    "active": "0",
+    "usage": 2
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 150
+   }
+  },
+  {
+   "cmpid": "neonsign_medium",
+   "name": "Medium Neon Sign",
+   "item": "-1423304443",
+   "category": "Lights",
+   "info": "A medium neon sign!",
+   "tips": [
+    "Requires 4 power to operate the sign"
+   ],
+   "attrs": {
+    "cmpid": "neonsign_medium",
+    "consumption": "4",
+    "active": "0",
+    "usage": 4
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 200
+   }
+  },
+  {
+   "cmpid": "neonsign_medium_animated",
+   "name": "Medium Animated Neon Sign",
+   "item": "42535890",
+   "category": "Lights",
+   "info": "An animated medium neon sign!",
+   "tips": [
+    "Requires 5 power to operate the sign"
+   ],
+   "attrs": {
+    "cmpid": "neonsign_medium_animated",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Frame 1",
+     "type": "in",
+     "consumable": true,
+     "x": 0.1,
+     "y": 1
+    },
+    {
+     "label": "Frame 2",
+     "type": "in",
+     "consumable": true,
+     "x": 0.45,
+     "y": 1
+    },
+    {
+     "label": "Frame 3",
+     "type": "in",
+     "consumable": true,
+     "x": 0.8,
+     "y": 1
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 2,
+    "mf": 300
+   }
+  },
+  {
+   "cmpid": "neonsign_large",
+   "name": "Large Neon Sign",
+   "item": "866332017",
+   "category": "Lights",
+   "info": "A large neon sign!",
+   "tips": [
+    "Requires 6 power to operate the sign"
+   ],
+   "attrs": {
+    "cmpid": "neonsign_large",
+    "consumption": "6",
+    "active": "0",
+    "usage": 6
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 250
+   }
+  },
+  {
+   "cmpid": "neonsign_large_animated",
+   "name": "Large Animated Neon Sign",
+   "item": "1643667218",
+   "category": "Lights",
+   "info": "An animated large neon sign!",
+   "tips": [
+    "Requires 7 power to operate the sign"
+   ],
+   "attrs": {
+    "cmpid": "neonsign_large_animated",
+    "consumption": "7",
+    "active": "0",
+    "usage": 7
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Frame 1",
+     "type": "in",
+     "consumable": true,
+     "x": 0.1,
+     "y": 1
+    },
+    {
+     "label": "Frame 2",
+     "type": "in",
+     "consumable": true,
+     "x": 0.3,
+     "y": 1
+    },
+    {
+     "label": "Frame 3",
+     "type": "in",
+     "consumable": true,
+     "x": 0.5,
+     "y": 1
+    },
+    {
+     "label": "Frame 4",
+     "type": "in",
+     "consumable": true,
+     "x": 0.7,
+     "y": 1
+    },
+    {
+     "label": "Frame 5",
+     "type": "in",
+     "consumable": true,
+     "x": 0.9,
+     "y": 1
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 5,
+    "mf": 350
+   }
+  },
+  {
+   "cmpid": "boombox",
+   "name": "Boom Box",
+   "item": "-1113501606",
+   "category": "Voice Props Pack DLC",
+   "info": "A large speaker to play recorded cassette tapes which can also stream audio from the internet. Open the settings to change audio options.",
+   "tips": [
+    "Requires 10+ input power for Audio Out to have power",
+    "Can be connected to other audio components"
+   ],
+   "attrs": {
+    "cmpid": "boombox",
+    "consumption": "10",
+    "active": "0",
+    "state": 0,
+    "usage": 10
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": -0.2
+    },
+    {
+     "label": "Toggle Play",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.25
+    },
+    {
+     "label": "Audio Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.2,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 200,
+    "mf": 100,
+    "cloth": 20
+   }
+  },
+  {
+   "cmpid": "connectedspeaker",
+   "name": "Connected Speaker",
+   "item": "968421290",
+   "category": "Voice Props Pack DLC",
+   "info": "A small speaker that will play any audio from a connected Boom Box.",
+   "tips": [
+    "Can be connected to other audio components"
+   ],
+   "attrs": {
+    "cmpid": "connectedspeaker",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power/Audio In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Audio Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "discoball",
+   "name": "Disco Ball",
+   "item": "1895235349",
+   "category": "Voice Props Pack DLC",
+   "info": "Get groovy with this stunning disco ball.",
+   "tips": [
+    "Can be connected to other audio components"
+   ],
+   "attrs": {
+    "cmpid": "discoball",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power/Audio In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Audio Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "discofloor",
+   "name": "Disco Floor",
+   "item": "1735402444",
+   "category": "Voice Props Pack DLC",
+   "info": "A vibrant flashing floor that pulses in time to music.",
+   "tips": [
+    "Can be connected to other audio components"
+   ],
+   "attrs": {
+    "cmpid": "discofloor",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power/Audio In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Audio Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "laserlight",
+   "name": "Laser Light",
+   "item": "853471967",
+   "category": "Voice Props Pack DLC",
+   "info": "A small device that shoots out visible lasers in time to music.",
+   "tips": [
+    "Can be connected to other audio components"
+   ],
+   "attrs": {
+    "cmpid": "laserlight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power/Audio In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Audio Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "microphonestand",
+   "name": "Microphone Stand",
+   "item": "39600618",
+   "category": "Voice Props Pack DLC",
+   "info": "A powered microphone that lets you broadcast your voice. Press [+reload] to change voice mode between high and low pitch.",
+   "tips": [
+    "Can be connected to other audio components"
+   ],
+   "attrs": {
+    "cmpid": "microphonestand",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power/Audio In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Audio Out",
+     "type": "out",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "soundlight",
+   "name": "Sound Light",
+   "item": "-343857907",
+   "category": "Voice Props Pack DLC",
+   "info": "A light that will pulse in time to music when connected to a Boom Box.",
+   "tips": [
+    "Can be connected to other audio components",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "soundlight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power/Audio In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.25
+    },
+    {
+     "label": "Audio Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.65
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "industrial_wall_light",
+   "name": "Industrial Wall Light",
+   "item": "1623701499",
+   "category": "Lights",
+   "info": "A small light source.",
+   "tips": [
+    "Has a passthrough power output",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "industrial_wall_light",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 30
+   }
+  },
+  {
+   "cmpid": "industrial_wall_light_blue",
+   "name": "Blue Industrial Wall Light",
+   "item": "1268178466",
+   "category": "Lights",
+   "info": "A small blue light source.",
+   "tips": [
+    "Has a passthrough power output",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "industrial_wall_light_blue",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 30
+   }
+  },
+  {
+   "cmpid": "industrial_wall_light_green",
+   "name": "Green Industrial Wall Light",
+   "item": "1268178466",
+   "category": "Lights",
+   "info": "A small green light source.",
+   "tips": [
+    "Has a passthrough power output",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "industrial_wall_light_green",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 30
+   }
+  },
+  {
+   "cmpid": "industrial_wall_light_red",
+   "name": "Red Industrial Wall Light",
+   "item": "-1160621614",
+   "category": "Lights",
+   "info": "A small red light source.",
+   "tips": [
+    "Has a passthrough power output",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "industrial_wall_light_red",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 30
+   }
+  },
+  {
+   "cmpid": "fogmachine",
+   "name": "Fogger-3000",
+   "item": "-1973785141",
+   "category": "Utilities",
+   "info": "A Fog machine which runs on low grade fuel. Can be set to fill an area with a dense fog or triggered by motion.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "fogmachine",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Turn On",
+     "type": "in",
+     "consumable": true,
+     "x": 0.1,
+     "y": 1
+    },
+    {
+     "label": "Toggle",
+     "type": "in",
+     "consumable": true,
+     "x": 0.45,
+     "y": 1
+    },
+    {
+     "label": "Turn Off",
+     "type": "in",
+     "consumable": true,
+     "x": 0.8,
+     "y": 1
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100,
+    "lgf": 30,
+    "pipe": 1
+   }
+  },
+  {
+   "cmpid": "snowmachine",
+   "name": "Snow Machine",
+   "item": "1358643074",
+   "category": "Utilities",
+   "info": "A machine which will blanket the surrounding terrain in snow.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "snowmachine",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Toggle",
+     "type": "in",
+     "consumable": true,
+     "x": 0.1,
+     "y": 1
+    },
+    {
+     "label": "Turn On",
+     "type": "in",
+     "consumable": true,
+     "x": 0.45,
+     "y": 1
+    },
+    {
+     "label": "Turn Off",
+     "type": "in",
+     "consumable": true,
+     "x": 0.8,
+     "y": 1
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 125,
+    "lgf": 30,
+    "pipe": 1
+   }
+  },
+  {
+   "cmpid": "strobelight",
+   "name": "Strobe Light",
+   "item": "2104517339",
+   "category": "Lights",
+   "info": "A flashing light, 3 speeds. Causes seizures.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "strobelight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Toggle",
+     "type": "in",
+     "consumable": true,
+     "x": 0.1,
+     "y": 1
+    },
+    {
+     "label": "Turn On",
+     "type": "in",
+     "consumable": true,
+     "x": 0.45,
+     "y": 1
+    },
+    {
+     "label": "Turn Off",
+     "type": "in",
+     "consumable": true,
+     "x": 0.8,
+     "y": 1
+    },
+    {
+     "label": "Dummy",
+     "type": "odummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100,
+    "hqm": 2
+   }
+  },
+  {
+   "cmpid": "spookyspeaker",
+   "name": "Spooky Speaker",
+   "item": "1885488976",
+   "category": "Utilities",
+   "info": "Frighten your guests with creepy and spooky halloween sounds!",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "spookyspeaker",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Turn On",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1
+    },
+    {
+     "label": "Turn Off",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1
+    },
+    {
+     "label": "Dummy",
+     "type": "odummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100,
+    "cloth": 20,
+    "wood": 400
+   }
+  },
+  {
+   "cmpid": "electric_furnace",
+   "name": "Electric Furnace",
+   "item": "-1196547867",
+   "category": "Industrial",
+   "info": "An electrical version of a furnace that uses power instead of a fuel source.",
+   "tips": [],
+   "attrs": {
+    "cmpid": "electric_furnace",
+    "consumption": "3",
+    "active": "0",
+    "usage": 3
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 5,
+    "mf": 200
+   }
+  },
+  {
+   "cmpid": "biofuelgenerator",
+   "name": "Biofuel Generator",
+   "item": "-1661343913",
+   "category": "Other",
+   "info": "A large pot that can convert organic matter into fuel.",
+   "tips": [
+    "Requires 5 power to operate and will output 1 power when stirring is needed",
+    "Produces a maximum of 300 Low Grade Fuel per hour"
+   ],
+   "attrs": {
+    "cmpid": "biofuelgenerator",
+    "consumption": "5",
+    "active": "0",
+    "state": 0,
+    "usage": 5,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Needs Stirring",
+     "type": "out",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Needs Stirring",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to Needs Stirring.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 250,
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "gunrack_horizontal",
+   "name": "Horizontal Weapon Rack",
+   "item": "-246672609",
+   "category": "Lights",
+   "info": "Artfully display your arsenal with a handcrafted wall-mounted weapon rack.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "gunrack_horizontal",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 120,
+    "wood": 100
+   }
+  },
+  {
+   "cmpid": "gunrack_tall_horizontal",
+   "name": "Tall Weapon Rack",
+   "item": "240752557",
+   "category": "Lights",
+   "info": "Artfully display your arsenal with a handcrafted wall-mounted weapon rack.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "gunrack_tall_horizontal",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 175,
+    "wood": 100
+   }
+  },
+  {
+   "cmpid": "gunrack_wide_horizontal",
+   "name": "Wide Weapon Rack",
+   "item": "-96256997",
+   "category": "Lights",
+   "info": "Artfully display your arsenal with a handcrafted wall-mounted weapon rack.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "gunrack_wide_horizontal",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 175,
+    "wood": 100
+   }
+  },
+  {
+   "cmpid": "bulbstringlights",
+   "name": "Bulb String Lights",
+   "item": "104856514",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A string of glowing bulbs, can be deployed point by point to light up your base.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "bulbstringlights",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "ceilingfluorescentlight",
+   "name": "Ceiling Fluorescent Light",
+   "item": "640470230",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A flicker-free fluorescent light.",
+   "tips": [
+    "Has a passthrough power output",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "ceilingfluorescentlight",
+    "consumption": "2",
+    "active": "0",
+    "usage": 2
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "chandelier",
+   "name": "Chandelier",
+   "item": "-1510616686",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A large adjustable electric chandelier. Very fancy.",
+   "tips": [
+    "Has a passthrough power output",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "chandelier",
+    "consumption": "4",
+    "active": "0",
+    "usage": 4
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  },
+  {
+   "cmpid": "tablelight",
+   "name": "Electric Table Lamp",
+   "item": "1717250161",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A small light source made out of an old oil can.",
+   "tips": [
+    "Has a passthrough power output",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "tablelight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "fairylights",
+   "name": "Fairy Lights",
+   "item": "54436981",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A wire of small fairy bulbs, can be deployed point by point to light up your base.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "fairylights",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "fluorescentlight",
+   "name": "Fluorescent Light",
+   "item": "1892536031",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "Bright enough to see what you’re doing.",
+   "tips": [
+    "Has a passthrough power output",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "fluorescentlight",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "spotlight",
+   "name": "Spot Light",
+   "item": "-1258821205",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A spotlight you can orient with a hammer.",
+   "tips": [
+    "Has a passthrough power output",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "spotlight",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "tripodspotlight",
+   "name": "Tripod Spot Light",
+   "item": "-2134097299",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A spotlight you can orient with a hammer.",
+   "tips": [
+    "Has a passthrough power output",
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "tripodspotlight",
+    "consumption": "5",
+    "active": "0",
+    "usage": 5
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50
+   }
+  },
+  {
+   "cmpid": "wallcabinet",
+   "name": "Wall Cabinet",
+   "item": "656829501",
+   "category": "Exhibit Decor Pack DLC",
+   "info": "A cabinet with a shelf for small items.",
+   "tips": [
+    "Must be purchased from the Rust Item Store to obtain the blueprint"
+   ],
+   "attrs": {
+    "cmpid": "wallcabinet",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.05,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 50,
+    "wood": 250
+   }
+  },
+  {
+   "cmpid": "neonsigntr",
+   "name": "Twitch Rivals Neon Sign",
+   "item": "381595627",
+   "category": "Other",
+   "info": "A Twitch Rivals Light-Up Neon Sign",
+   "tips": [
+    "Has a passthrough power output",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "neonsigntr",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 150
+   }
+  },
+  {
+   "cmpid": "lightupframe_small",
+   "name": "Light-Up Frame Small",
+   "item": "1691223771",
+   "category": "Other",
+   "info": "A small light-up frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "lightupframe_small",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "lightupframe_large",
+   "name": "Light-Up Frame Large",
+   "item": "242421166",
+   "category": "Other",
+   "info": "A large light-up frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "lightupframe_large",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "lightupframe_standing",
+   "name": "Light-Up Frame Standing",
+   "item": "1950013766",
+   "category": "Other",
+   "info": "A standing light-up frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "lightupframe_standing",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "lightupframe_xl",
+   "name": "Light-Up Frame XL",
+   "item": "1801656689",
+   "category": "Other",
+   "info": "An extra large light-up frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "lightupframe_xl",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "lightupframe_xxl",
+   "name": "Light-Up Frame XXL",
+   "item": "1447138977",
+   "category": "Other",
+   "info": "An extra extra large light-up frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "lightupframe_xxl",
+    "consumption": "1",
+    "active": "0",
+    "usage": 1
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "scrapframe_small",
+   "name": "Shutter Frame Small",
+   "item": "-498301781",
+   "category": "Other",
+   "info": "A small shutter frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "scrapframe_small",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "scrapframe_large",
+   "name": "Shutter Frame Large",
+   "item": "-1094453063",
+   "category": "Other",
+   "info": "A large shutter frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "scrapframe_large",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "scrapframe_standing",
+   "name": "Shutter Frame Standing",
+   "item": "-1774190142",
+   "category": "Other",
+   "info": "A standing shutter frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "scrapframe_standing",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "scrapframe_xl",
+   "name": "Shutter Frame XL",
+   "item": "-1244287686",
+   "category": "Other",
+   "info": "An extra large shutter frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "scrapframe_xl",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "scrapframe_xxl",
+   "name": "Shutter Frame XXL",
+   "item": "-1211801774",
+   "category": "Other",
+   "info": "An extra extra large shutter frame",
+   "tips": [],
+   "attrs": {
+    "cmpid": "scrapframe_xxl",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "wood": 150
+   }
+  },
+  {
+   "cmpid": "watercatcher_large",
+   "name": "Large Water Catcher",
+   "item": "-1100168350",
+   "category": "Water",
+   "info": "Collects drinkable water from the air via rain and dew.",
+   "tips": [
+    "Can be chained to other water sources"
+   ],
+   "attrs": {
+    "cmpid": "watercatcher_large",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 12,
+    "charge_max": 50000,
+    "charge_min": 0,
+    "usage": 1,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "fusage": 12,
+    "active_fusage": 0,
+    "last_active_fusage": 0,
+    "active_fids": [],
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Water Out",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "25000",
+     "tip": "Enter the capacity in mL.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining fluid while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "wood": 500,
+    "mf": 200,
+    "tarp": 2
+   }
+  },
+  {
+   "cmpid": "watercatcher_small",
+   "name": "Small Water Catcher",
+   "item": "-132247350",
+   "category": "Water",
+   "info": "Collects drinkable water from the air via rain and dew.",
+   "tips": [
+    "Can be chained to other water sources"
+   ],
+   "attrs": {
+    "cmpid": "watercatcher_small",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 6,
+    "charge_max": 20000,
+    "charge_min": 0,
+    "usage": 0,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "fusage": 6,
+    "active_fusage": 0,
+    "last_active_fusage": 0,
+    "active_fids": [],
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Water Out",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "10000",
+     "tip": "Enter the capacity in mL.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining fluid while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "wood": 100,
+    "mf": 50,
+    "tarp": 1
+   }
+  },
+  {
+   "cmpid": "waterbarrel",
+   "name": "Water Barrel",
+   "item": "-1863559151",
+   "category": "Water",
+   "info": "A storage container for water.",
+   "tips": [
+    "Can be chained to other water sources"
+   ],
+   "attrs": {
+    "cmpid": "waterbarrel",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 12,
+    "charge_max": 20000,
+    "charge_min": 0,
+    "usage": 0,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "fusage": 12,
+    "active_fusage": 0,
+    "last_active_fusage": 0,
+    "active_fids": [],
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Water Out",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "10000",
+     "tip": "Enter the capacity in mL.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining fluid while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "wood": 250,
+    "tarp": 1
+   }
+  },
+  {
+   "cmpid": "waterpump",
+   "name": "Water Pump",
+   "item": "-1284169891",
+   "category": "Water",
+   "info": "Can be placed in a water source to collect that water while powered. Can be connected to other Water entities.",
+   "tips": [
+    "Requires power to pump water in (generate fluid)",
+    "Pumps (generates) 85 mL of fluid every 10 seconds",
+    "Can be chained to other water sources",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "waterpump",
+    "isroot": "1",
+    "combinable": "1",
+    "consumption": "5",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 12,
+    "charge_max": 2000,
+    "charge_min": 0,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "usage": 5,
+    "active_fusage": 0,
+    "last_active_fusage": 0,
+    "active_fids": [],
+    "fusage": 0,
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "update_amount": 85,
+    "update_rate": 10,
+    "update_value": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Water Output",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "1000",
+     "tip": "Enter the capacity in mL.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining fluid while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "wood": 250,
+    "mf": 200,
+    "gear": 1
+   }
+  },
+  {
+   "cmpid": "waterpurifier",
+   "name": "Powered Water Purifier",
+   "item": "-365097295",
+   "category": "Water",
+   "info": "A device that converts salt water to fresh water while powered.",
+   "tips": [
+    "Does not require power to flow out fluids",
+    "Can be chained to other water sources",
+    "Purifies salt water at a 2:1 loss, meaning 50% of the fluid is lost during purification"
+   ],
+   "attrs": {
+    "cmpid": "waterpurifier",
+    "isroot": "1",
+    "combinable": "1",
+    "consumption": "5",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 12,
+    "charge_max": 5000,
+    "charge_min": 0,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "usage": 5,
+    "active_fusage": 0,
+    "last_active_fusage": 0,
+    "active_fids": [],
+    "fusage": 5,
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1"
+   },
+   "ports": [
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Water Out",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "1000",
+     "tip": "Enter the capacity in mL.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining fluid while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "wood": 100,
+    "mf": 300,
+    "cloth": 20
+   }
+  },
+  {
+   "cmpid": "waterpurifier_simple",
+   "name": "Water Purifier",
+   "item": "2114754781",
+   "category": "Water",
+   "info": "A Water Purifier. Place overtop of a campfire. Will provide clean, drinkable water from salty, or stagnant water.",
+   "tips": [
+    "Does not require a power source since the purifier uses a lit campfire for purification",
+    "Can be chained to other water sources",
+    "Purifies salt water at a 4:1 loss, meaning 75% of the fluid is lost during purification"
+   ],
+   "attrs": {
+    "cmpid": "waterpurifier_simple",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 12,
+    "charge_max": 5000,
+    "charge_min": 0,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "usage": 0,
+    "active_fusage": 0,
+    "last_active_fusage": 0,
+    "active_fids": [],
+    "fusage": 0,
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1"
+   },
+   "ports": [
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Water Out",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Dummy",
+     "type": "dummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "1000",
+     "tip": "Enter the capacity in mL.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining fluid while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "tank": 1,
+    "mf": 15,
+    "cloth": 10
+   }
+  },
+  {
+   "cmpid": "2mod_fueltank",
+   "name": "Fuel Tank Vehicle Module",
+   "item": "1186655046",
+   "category": "Water",
+   "info": "Dual module large fuel tank.",
+   "tips": [
+    "Can be chained to other water sources",
+    "Has two inputs and two outputs eliminating the need for a combiner or splitter"
+   ],
+   "attrs": {
+    "cmpid": "2mod_fueltank",
+    "isroot": "1",
+    "combinable": "1",
+    "display": 0,
+    "display_filter": "time",
+    "subdisplay": 0,
+    "charge": "0",
+    "passthrough": "0",
+    "output": 500,
+    "charge_max": 200000,
+    "charge_min": 0,
+    "active_usage": 0,
+    "last_active_usage": 0,
+    "active_ids": [],
+    "usage": 0,
+    "active_fusage": 0,
+    "last_active_fusage": 0,
+    "active_fids": [],
+    "fusage": 500,
+    "state": 1,
+    "laststate": "0",
+    "laststate2": "0",
+    "blockable": "1",
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Water In 1",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.25
+    },
+    {
+     "label": "Water In 2",
+     "type": "fin",
+     "consumable": true,
+     "x": 1,
+     "y": 0.25
+    },
+    {
+     "label": "Water Out 1",
+     "type": "fout",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.65
+    },
+    {
+     "label": "Water Out 2",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.65
+    },
+    {
+     "label": "Dummy",
+     "type": "dummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [
+    {
+     "name": "Capacity",
+     "type": "float",
+     "value": "100000",
+     "tip": "Enter the capacity in mL.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Time Remaining",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to display the remaining fluid while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Show Active Usage",
+     "type": "bool",
+     "value": "false",
+     "tip": "Enable to display the active usage while flowing.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    }
+   ],
+   "craft": {
+    "mf": 175,
+    "wood": 100
+   }
+  },
+  {
+   "cmpid": "fluid_switch",
+   "name": "Fluid Switch & Pump",
+   "item": "443432036",
+   "category": "Water",
+   "info": "A simple switch that enables fluid to pass through. Can be switched on/off manually or via electricity. Can also pump water upwards to higher entities when powered.",
+   "tips": [
+    "Pump Power is required for the component to pump fluid upwards (overcome gravity)",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "fluid_switch",
+    "consumption": "0",
+    "state": 0,
+    "passthrough": "0",
+    "blockable": "1",
+    "usage": 0,
+    "fusage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Pump Power",
+     "type": "in",
+     "consumable": false,
+     "x": 0.2,
+     "y": -0.2
+    },
+    {
+     "label": "Toggle",
+     "type": "in",
+     "consumable": true,
+     "x": 0.6,
+     "y": -0.2
+    },
+    {
+     "label": "Water Out",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 150
+   }
+  },
+  {
+   "cmpid": "fluid_combiner",
+   "name": "Fluid Combiner",
+   "item": "-265292885",
+   "category": "Water",
+   "info": "Combines three separate fluid connections into one connection.",
+   "tips": [
+    "Can be combined with other water sources",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "fluid_combiner",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0,
+    "fusage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Water In 1",
+     "type": "fin",
+     "consumable": true,
+     "x": 0.1,
+     "y": -0.2
+    },
+    {
+     "label": "Water In 2",
+     "type": "fin",
+     "consumable": true,
+     "x": 0.45,
+     "y": -0.2
+    },
+    {
+     "label": "Water In 3",
+     "type": "fin",
+     "consumable": true,
+     "x": 0.8,
+     "y": -0.2
+    },
+    {
+     "label": "Water Out",
+     "type": "fout",
+     "consumable": true,
+     "x": 0.4,
+     "y": 1.05
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "fluid_splitter",
+   "name": "Fluid Splitter",
+   "item": "-1166712463",
+   "category": "Water",
+   "info": "Splits a fluid connection into three separate connections.",
+   "tips": [
+    "Evenly splits the input fluid to all connected outputs",
+    "A Fluid Switch & Pump is required for fluid to flow upwards (overcome gravity)",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "fluid_splitter",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0,
+    "fusage": 1,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Water Out 1",
+     "type": "fout",
+     "consumable": true,
+     "direct": true,
+     "x": 0.1,
+     "y": 1
+    },
+    {
+     "label": "Water Out 2",
+     "type": "fout",
+     "consumable": true,
+     "direct": true,
+     "x": 0.45,
+     "y": 1
+    },
+    {
+     "label": "Water Out 3",
+     "type": "fout",
+     "consumable": true,
+     "direct": true,
+     "x": 0.8,
+     "y": 1
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "sprinkler",
+   "name": "Sprinkler",
+   "item": "-781014061",
+   "category": "Water",
+   "info": "A small sprinkler that sprays water around it. Requires a hose connection to supply it with water.",
+   "tips": [
+    "A Fluid Switch & Pump is required for fluid to flow upwards (overcome gravity)",
+    "When the passthrough output is used, the sprinker will consume double the water"
+   ],
+   "attrs": {
+    "cmpid": "sprinkler",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0,
+    "fusage": 2,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Water In",
+     "type": "fin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Passthrough",
+     "type": "fout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "hopper",
+   "name": "Hopper",
+   "item": "1428574144",
+   "category": "Industrial",
+   "info": "Will suck up any dropped items in its radius while powered",
+   "tips": [
+    "The radius is 1.5 meters",
+    "Can only be placed on Large Wood Boxes and Storage Barrels"
+   ],
+   "attrs": {
+    "cmpid": "hopper",
+    "consumption": "8",
+    "active": "0",
+    "usage": 8
+   },
+   "ports": [
+    {
+     "label": "Industrial In",
+     "type": "iin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Industrial Out",
+     "type": "iout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 200,
+    "gear": 1
+   }
+  },
+  {
+   "cmpid": "industrial_combiner",
+   "name": "Industrial Combiner",
+   "item": "1538126328",
+   "category": "Industrial",
+   "info": "Combines three separate industrial connections into one connection.",
+   "tips": [
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "industrial_combiner",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Industrial In 1",
+     "type": "iin",
+     "consumable": true,
+     "x": 1,
+     "y": 0.1
+    },
+    {
+     "label": "Industrial In 2",
+     "type": "iin",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Industrial In 3",
+     "type": "iin",
+     "consumable": true,
+     "x": 1,
+     "y": 0.7
+    },
+    {
+     "label": "Industrial Out",
+     "type": "iout",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "industrial_splitter",
+   "name": "Industrial Splitter",
+   "item": "742745918",
+   "category": "Industrial",
+   "info": "Splits an industrial connection into three separate connections.",
+   "tips": [
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "industrial_splitter",
+    "consumption": "0",
+    "passthrough": "0",
+    "usage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Industrial In",
+     "type": "iin",
+     "consumable": true,
+     "x": 0.4,
+     "y": -0.2
+    },
+    {
+     "label": "Industrial Out 1",
+     "type": "iout",
+     "consumable": true,
+     "direct": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Industrial Out 2",
+     "type": "iout",
+     "consumable": true,
+     "direct": true,
+     "x": 0.4,
+     "y": 1.05
+    },
+    {
+     "label": "Industrial Out 3",
+     "type": "iout",
+     "consumable": true,
+     "direct": true,
+     "x": 1,
+     "y": 0.4
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "industrial_conveyor",
+   "name": "Industrial Conveyor",
+   "item": "610102428",
+   "category": "Industrial",
+   "info": "Moves an item from one container to another.",
+   "tips": [
+    "Can only see the first 32 containers it encounters before reaching max input",
+    "Cannot push or pull items from other conveyors, a Storage Adaptor must be in-between",
+    "Can be rotated before placing by pressing R in-game, or by pressing R after placing in the simulator",
+    "Requires 1 power to operate and 2 power for aux ports to output",
+    "Has 2 aux outputs: Filter Pass and Filter Fail (each output 1 power)"
+   ],
+   "attrs": {
+    "cmpid": "industrial_conveyor",
+    "consumption": "1",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 1,
+    "rotatable": 1,
+    "rotation": 0,
+    "poweron": 0,
+    "poweroff": 0,
+    "props_offset": {
+     "x": 0,
+     "y": 10
+    }
+   },
+   "ports": [
+    {
+     "label": "Industrial In",
+     "type": "iin",
+     "consumable": false,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.1,
+     "y": -0.2
+    },
+    {
+     "label": "Turn On",
+     "type": "in",
+     "consumable": true,
+     "x": 0.22,
+     "y": -0.2
+    },
+    {
+     "label": "Turn Off",
+     "type": "in",
+     "consumable": true,
+     "x": 0.57,
+     "y": -0.2
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.9,
+     "y": -0.2
+    },
+    {
+     "label": "Filter Pass",
+     "type": "out",
+     "consumable": true,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Filter Fail",
+     "type": "out",
+     "consumable": true,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Industrial Out",
+     "type": "iout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Dummy",
+     "type": "odummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [
+    {
+     "name": "Filter Pass",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to Filter Pass.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "Filter Fail",
+     "type": "bool",
+     "value": "true",
+     "tip": "Enable to output power to Filter Fail.",
+     "alert": "This is a simulator-only setting and does not exist in the game."
+    },
+    {
+     "name": "JSON Filter",
+     "type": "text",
+     "value": "",
+     "tip": "Enter the JSON Filter text.",
+     "alert": "Hold SHIFT to display the JSON copy/paste buttons on the Conveyor Filter window."
+    }
+   ],
+   "craft": {
+    "mf": 75
+   }
+  },
+  {
+   "cmpid": "industrial_crafter",
+   "name": "Industrial Crafter",
+   "item": "1430085198",
+   "category": "Industrial",
+   "info": "Attaches to a workbench to allow automated crafting.",
+   "tips": [
+    "You can place a maximum of two Industrial Crafters on a single workbench"
+   ],
+   "attrs": {
+    "cmpid": "industrial_crafter",
+    "consumption": "1",
+    "state": 0,
+    "passthrough": "0",
+    "usage": 1,
+    "poweron": 0,
+    "poweroff": 0
+   },
+   "ports": [
+    {
+     "label": "Industrial In",
+     "type": "iin",
+     "consumable": false,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": -0.1,
+     "y": -0.2
+    },
+    {
+     "label": "Turn On",
+     "type": "in",
+     "consumable": true,
+     "x": 0.22,
+     "y": -0.2
+    },
+    {
+     "label": "Turn Off",
+     "type": "in",
+     "consumable": true,
+     "x": 0.57,
+     "y": -0.2
+    },
+    {
+     "label": "Toggle",
+     "type": "in",
+     "consumable": true,
+     "x": 0.9,
+     "y": -0.2
+    },
+    {
+     "label": "Blueprint Out",
+     "type": "iout",
+     "consumable": false,
+     "x": 0.2,
+     "y": 1.05
+    },
+    {
+     "label": "Blueprints In",
+     "type": "iin",
+     "consumable": false,
+     "x": 0.6,
+     "y": 1.05
+    },
+    {
+     "label": "Industrial Out",
+     "type": "iout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Dummy",
+     "type": "odummy",
+     "consumable": true,
+     "x": 0,
+     "y": 0
+    }
+   ],
+   "props": [],
+   "craft": {
+    "hqm": 3,
+    "tech": 2
+   }
+  },
+  {
+   "cmpid": "storage_adapter",
+   "name": "Storage Adaptor",
+   "item": "-1049172752",
+   "category": "Industrial",
+   "info": "Attach to a storage container to allow industrial input/output connections.",
+   "tips": [
+    "Requires 1 input power to enable automatic storage contents sorting in the UI",
+    "Most storage containers allow for multiple Storage Adaptors to be attached",
+    "Can be rotated by pressing R after placing in the simulator"
+   ],
+   "attrs": {
+    "cmpid": "storage_adapter",
+    "consumption": "1",
+    "active": "0",
+    "usage": 0,
+    "rotatable": 1,
+    "rotation": 0
+   },
+   "ports": [
+    {
+     "label": "Industrial In",
+     "type": "iin",
+     "consumable": true,
+     "x": -0.15,
+     "y": 0.4
+    },
+    {
+     "label": "Industrial Out",
+     "type": "iout",
+     "consumable": true,
+     "x": 1,
+     "y": 0.4
+    },
+    {
+     "label": "Power In",
+     "type": "in",
+     "consumable": true,
+     "x": 0.2,
+     "y": -0.2
+    },
+    {
+     "label": "Passthrough",
+     "type": "out",
+     "consumable": true,
+     "x": 0.6,
+     "y": -0.2
+    }
+   ],
+   "props": [],
+   "craft": {
+    "mf": 100
+   }
+  }
+ ]
+}
